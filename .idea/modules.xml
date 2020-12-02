@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MCameraLibrary/MCameraLibrary.iml" filepath="$PROJECT_DIR$/MCameraLibrary/MCameraLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MPChartLib/MPChartLib.iml" filepath="$PROJECT_DIR$/MPChartLib/MPChartLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alarmmanagerclock/alarmmanagerclock.iml" filepath="$PROJECT_DIR$/alarmmanagerclock/alarmmanagerclock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/animatelibrary/animatelibrary.iml" filepath="$PROJECT_DIR$/animatelibrary/animatelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crop/crop.iml" filepath="$PROJECT_DIR$/crop/crop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cropimage/cropimage.iml" filepath="$PROJECT_DIR$/cropimage/cropimage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seanUtils/seanUtils.iml" filepath="$PROJECT_DIR$/seanUtils/seanUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weatherclockwidget-master.iml" filepath="$PROJECT_DIR$/weatherclockwidget-master.iml" />
+    </modules>
+  </component>
+</project>

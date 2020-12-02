@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="nba_logs">
+        <item>@drawable/coffee_cappuccino</item>
+        <item>@drawable/coffee_latte</item>
+        <item>@drawable/coffee_mocha</item>
+    </array>
+    <string-array name="nba">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+            </string-array>
+</resources>

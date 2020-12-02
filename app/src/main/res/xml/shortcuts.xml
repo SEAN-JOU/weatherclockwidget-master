@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="setting"
+        android:enabled="true"
+        android:icon="@drawable/use2"
+        android:shortcutShortLabel="@string/setting_shortcut_short_label1"
+        android:shortcutLongLabel="@string/setting_shortcut_long_label1" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.shaen.weatherclockwidget"
+            android:targetClass="com.shaen.weatherclockwidget.setting.SettingActivity"
+            />
+    </shortcut>
+
+
+    <shortcut
+        android:shortcutId="chart"
+        android:enabled="true"
+        android:icon="@drawable/plus"
+        android:shortcutShortLabel="@string/chart_shortcut_short_label1"
+        android:shortcutLongLabel="@string/chart_shortcut_long_label1" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.shaen.weatherclockwidget"
+            android:targetClass="com.shaen.weatherclockwidget.chart.ChartActivity"
+            />
+    </shortcut>
+
+
+    <shortcut
+        android:shortcutId="map"
+        android:enabled="true"
+        android:icon="@drawable/expect"
+        android:shortcutShortLabel="@string/map_shortcut_short_label1"
+        android:shortcutLongLabel="@string/map_shortcut_long_label1" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.shaen.weatherclockwidget"
+            android:targetClass="com.shaen.weatherclockwidget.map.MapsActivity" />
+    </shortcut>
+
+
+    <shortcut
+        android:shortcutId="camera"
+        android:enabled="true"
+        android:icon="@drawable/happy"
+        android:shortcutShortLabel="@string/camera_shortcut_short_label1"
+        android:shortcutLongLabel="@string/camera_shortcut_long_label1" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.shaen.weatherclockwidget"
+            android:targetClass="com.shaen.weatherclockwidget.camera.CameraActivity" />
+    </shortcut>
+
+</shortcuts>

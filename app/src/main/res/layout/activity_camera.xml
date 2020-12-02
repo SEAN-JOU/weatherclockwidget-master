@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shaen.weatherclockwidget.camera.CameraActivity">
+
+
+    <com.google.android.cameraview.CameraView
+        android:id="@+id/mCameraView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="false"></com.google.android.cameraview.CameraView>
+
+
+    <ImageView
+        android:id="@+id/ivFlash"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_flash_off" />
+
+    <ImageView
+        android:id="@+id/btnChooice"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/front"
+        android:text="Choice Camera" />
+
+
+    <ImageView
+        android:id="@+id/btnPicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/takecamera"
+        android:text="Picture" />
+
+
+    <ImageView
+        android:id="@+id/gallery"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/gallery_plus"
+        android:text="Picture" />
+
+
+    <Button
+        android:id="@+id/btnCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:text="video_start"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:text="video_stop"
+        android:visibility="gone" />
+
+
+</RelativeLayout>
