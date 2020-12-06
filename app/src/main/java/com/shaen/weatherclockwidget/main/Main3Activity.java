@@ -55,10 +55,6 @@ public class Main3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        getversion.setPriority(8);
-        getversion.start();
-
-
         progress = findViewById(R.id.aaaa);
         ggg = findViewById(R.id.ggg);
         video = findViewById(R.id.video);
@@ -87,10 +83,11 @@ public class Main3Activity extends AppCompatActivity {
                             public void onClick(QMUIDialog dialog, int index) {
                                 dialog.dismiss();
                                 Toast.makeText(Main3Activity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Main3Activity.this, ScanActivity.class));
                             }
                         }).create(R.style.MyAlertDialogStyle).show();
                        // .create(mCurrentDialogStyle).show();
-     //           startActivity(new Intent(Main3Activity.this, ScanActivity.class));
+     //
             }
         });
         video.setOnClickListener(new View.OnClickListener() {
@@ -230,47 +227,9 @@ public class Main3Activity extends AppCompatActivity {
         }
     });
 
-    Thread getversion = new Thread(new Runnable() {
-        @Override
-        public void run() {
-
-            OkHttpClient getClient = new OkHttpClient.Builder().build();
-            Request request = new Request.Builder()
-                    .url("http://www.present810209.twf.node.tw/nacoAPI.php")
-                    .build();
-
-
-            Call call = getClient.newCall(request);
-            call.enqueue(new okhttp3.Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                }
-
-                @Override
-                public void onResponse(Call call, final Response response) throws IOException {
-
-                    res = response.body().string();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Gson gson = new Gson();
-                            updateType = gson.fromJson(res, UpdateType.class);
-
-                            UpdateVersion();
-
-                        }
-                    });
-                }
-            });
-        }
-    });
-
-
     public void UpdateVersion() {
 
-
         try {
-
             PackageInfo pInfo = null;
             pInfo = Main3Activity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
             localverCode = pInfo.versionCode;
