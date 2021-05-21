@@ -4,70 +4,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".PrivacyServiceActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/value3"
-            android:layout_width="300dp"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/copy3"
-            android:layout_width="100dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Button" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/value2"
-            android:layout_width="300dp"
-            android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/value2"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/copy2"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="Button" />
+                <Button
+                    android:id="@+id/copy2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="Button" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/value1"
-            android:layout_width="300dp"
-            android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/value3"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/copy1"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Button" />
-    </LinearLayout>
+                <Button
+                    android:id="@+id/copy3"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="Button" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="save" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-    <com.shaen.weatherclockwidget.fastwebview.FastWebView
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="WebViewLayout" />
+                <EditText
+                    android:id="@+id/value1"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/copy1"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="save" />
+
+            <com.shaen.weatherclockwidget.fastwebview.FastWebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                tools:ignore="WebViewLayout" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

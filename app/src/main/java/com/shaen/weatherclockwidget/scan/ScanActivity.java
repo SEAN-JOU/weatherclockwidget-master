@@ -34,6 +34,9 @@ public class ScanActivity extends AppCompatActivity {
         createCameraSource();
     }
 
+    protected void onResume(){
+        super.onResume();
+    }
     private void createCameraSource() {
 
         BarcodeDetector barcodedetector = new BarcodeDetector.Builder(this)
@@ -87,11 +90,16 @@ public class ScanActivity extends AppCompatActivity {
                             ett.setText(
                                     barcodes.valueAt(0).displayValue
                             );
-                            PrivacyServiceActivity.url = barcodes.valueAt(0).displayValue;
-                            Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
-                            it.putExtra("URL",barcodes.valueAt(0).displayValue);
-                            ett.setText("");
-                            startActivity(it);
+                            if(ett.getText() != null){
+                                PrivacyServiceActivity.url = ett.getText().toString();
+                                Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
+                                it.putExtra("URL1",ett.getText().toString());
+                                if(it.getStringExtra("URL1") != null){
+                                    startActivity(it);
+                                }
+                            }
+
+
                         }});}}});}}
 
 

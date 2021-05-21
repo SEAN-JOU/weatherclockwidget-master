@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -51,7 +53,7 @@ public class PrivacyServiceActivity extends AppCompatActivity {
     Button save,copy1,copy2,copy3;
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor editor;
-    public static String url;
+    public static String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         setContentView(setLayoutId());
         mSharedPreferences = PrivacyServiceActivity.this.getSharedPreferences("com.shaen.weatherclockwidget", MODE_PRIVATE);
         editor = mSharedPreferences.edit();
-        initView();
+
     }
 
     protected int setLayoutId() {
@@ -72,13 +74,9 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         value2 = findViewById(R.id.value2);
         value3 = findViewById(R.id.value3);
         copy1 = findViewById(R.id.copy1);
-        copy1 = findViewById(R.id.copy1);
-        copy1 = findViewById(R.id.copy1);
+        copy2 = findViewById(R.id.copy2);
+        copy3 = findViewById(R.id.copy3);
         save = findViewById(R.id.save);
-        value1.setText(mSharedPreferences.getString("value1",""));
-        value2.setText(mSharedPreferences.getString("value2",""));
-        value3.setText(mSharedPreferences.getString("value3",""));
-
         copy1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +114,11 @@ public class PrivacyServiceActivity extends AppCompatActivity {
                 Toast.makeText(PrivacyServiceActivity.this,"Save Success",Toast.LENGTH_SHORT).show();
             }
         });
+        value1.setText(mSharedPreferences.getString("value1",""));
+        value2.setText(mSharedPreferences.getString("value2",""));
+        value3.setText(mSharedPreferences.getString("value3",""));
+
+
         wv = (FastWebView) findViewById(R.id.webView);
         wv.setWebViewClient(new MyWebClient());
         wv.setWebChromeClient(new MyWebChromeClient());
@@ -138,10 +141,19 @@ public class PrivacyServiceActivity extends AppCompatActivity {
     @SuppressLint("JavascriptInterface")
     public void onResume() {
         super.onResume();
-        if(getIntent().getStringExtra("URL") != null){
-            url = getIntent().getStringExtra("URL");
-            wv.loadUrl(url);
-        }
+        CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                    try{
+                        wv.loadUrl(getIntent().getStringExtra("URL1"));
+                    }catch (Exception e){
+                        Log.d("aaaaaaa",e.getMessage());
+                    }
+            }
+            public void onFinish() {
+                this.cancel();
+            }};
+        countDownTimer.start();
+        initView();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             webSettings.setAllowFileAccessFromFileURLs(true);
             webSettings.setAllowUniversalAccessFromFileURLs(true);
@@ -228,7 +240,6 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         @JavascriptInterface
         public void getSource(String html) {
             if(html != null){
-
             }
         }
     }
