@@ -16,6 +16,7 @@ import android.widget.RemoteViews;
 import com.shaen.weatherclockwidget.R;
 import com.shaen.weatherclockwidget.main.AlarmActivity;
 import com.shaen.weatherclockwidget.main.MainActivity;
+import com.shaen.weatherclockwidget.scan.ScanActivity;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -69,7 +70,7 @@ public class NewAppWidget extends AppWidgetProvider {
 
 //        Calendar mCalendar = Calendar.getInstance();
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, ScanActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         Intent intent1 = new Intent(context, AlarmActivity.class);
         PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);

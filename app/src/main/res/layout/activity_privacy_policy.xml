@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PrivacyServiceActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/value3"
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/copy3"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/value2"
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/copy2"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Button" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/value1"
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/copy1"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Button" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save" />
+
+    <com.shaen.weatherclockwidget.fastwebview.FastWebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="WebViewLayout" />
+
+</LinearLayout>

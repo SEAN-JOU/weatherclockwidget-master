@@ -118,7 +118,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </service>
-
+        <activity
+            android:name=".PrivacyServiceActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".main.SplashActivity"
             android:screenOrientation="portrait"

@@ -1,5 +1,6 @@
 package com.shaen.weatherclockwidget.scan;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.shaen.weatherclockwidget.PrivacyServiceActivity;
 import com.shaen.weatherclockwidget.R;
 
 import java.io.IOException;
@@ -21,8 +23,6 @@ public class ScanActivity extends AppCompatActivity {
 
     SurfaceView cameraView;
     EditText ett;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +82,16 @@ public class ScanActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes =detections.getDetectedItems();
 
                 if (barcodes.size() != 0) {
-                    ett.post(new Runnable() {    // Use the post method of the TextView
+                    ett.post(new Runnable() {
                         public void run() {
-                            ett.setText(    // Update the TextView
+                            ett.setText(
                                     barcodes.valueAt(0).displayValue
                             );
+                            PrivacyServiceActivity.url = barcodes.valueAt(0).displayValue;
+                            Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
+                            it.putExtra("URL",barcodes.valueAt(0).displayValue);
+                            ett.setText("");
+                            startActivity(it);
                         }});}}});}}
 
 

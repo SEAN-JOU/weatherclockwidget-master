@@ -129,7 +129,7 @@ public class NewAppWidgetConfigureActivity extends Activity {
         set.setVisibility(View.GONE);
         cancelset.setVisibility(View.GONE);
 
-        findViewById(R.id.imv).setOnLongClickListener(new View.OnLongClickListener() {
+        findViewById(R.id.txv1).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 set.setVisibility(View.VISIBLE);
