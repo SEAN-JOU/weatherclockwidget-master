@@ -9,17 +9,18 @@
 
     <EditText
         android:id="@+id/ett"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sfv"
         tools:ignore="MissingConstraints"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteX="99dp" />
+        tools:layout_constraintTop_creator="1" />
 
     <SurfaceView
         android:id="@+id/sfv"

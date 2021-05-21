@@ -116,11 +116,17 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
-        </activity> <!-- <service -->
-        <!-- android:name=".appwidget.NewAppWidget$UpdateTimeService" -->
-        <!-- android:enabled="true" -->
-        <!-- android:exported="true" -->
-        <!-- android:permission="android.permission.BIND_JOB_SERVICE " /> -->
+        </activity>
+
+        <activity
+            android:name=".appwidget.NewAppWidgetConfigureActivity1"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+
         <service
             android:name=".main.notification.MyFirebaseMessagingService"
             android:enabled="true"
