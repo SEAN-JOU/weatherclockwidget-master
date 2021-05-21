@@ -87,19 +87,20 @@ public class ScanActivity extends AppCompatActivity {
                 if (barcodes.size() != 0) {
                     ett.post(new Runnable() {
                         public void run() {
-                            ett.setText(
-                                    barcodes.valueAt(0).displayValue
-                            );
-                            if(ett.getText() != null){
+                            ett.setText(barcodes.valueAt(0).displayValue);
+                            if(ett.getText().toString().contains("http")){
                                 PrivacyServiceActivity.url = ett.getText().toString();
                                 Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
                                 it.putExtra("URL1",ett.getText().toString());
                                 if(it.getStringExtra("URL1") != null){
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                     startActivity(it);
                                 }
                             }
-
-
                         }});}}});}}
 
 
