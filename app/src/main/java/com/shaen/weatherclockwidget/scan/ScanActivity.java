@@ -2,9 +2,11 @@ package com.shaen.weatherclockwidget.scan;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -14,10 +16,13 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.shaen.weatherclockwidget.NumberUtils;
 import com.shaen.weatherclockwidget.PrivacyServiceActivity;
 import com.shaen.weatherclockwidget.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScanActivity extends AppCompatActivity {
 
@@ -88,18 +93,26 @@ public class ScanActivity extends AppCompatActivity {
                     ett.post(new Runnable() {
                         public void run() {
                             ett.setText(barcodes.valueAt(0).displayValue);
+                            String inputString = ett.getText().toString();
+                            String[] stringArray = inputString.split("\n");
+                            Log.d("aaaaaaaa",stringArray[0]);
                             if(ett.getText().toString().contains("http")){
-                                PrivacyServiceActivity.url = ett.getText().toString();
-                                Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
-                                it.putExtra("URL1",ett.getText().toString());
-                                if(it.getStringExtra("URL1") != null){
-                                    try {
-                                        Thread.sleep(1000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+                                if(ett.getText().toString().contains("app")){
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(ett.getText().toString())));
+                                    camerasource.stop();
+                                }else{
+                                    Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
+                                    it.putExtra("URL1",ett.getText().toString());
+                                    if(it.getStringExtra("URL1") != null){
+                                        startActivity(it);
                                     }
-                                    startActivity(it);
                                 }
+                            }else if(NumberUtils.isNumber(stringArray[0])){
+                                Uri uri = Uri.parse("smsto:" + stringArray[0]);
+                                Intent intent=new Intent(Intent.ACTION_SENDTO,uri);
+                                intent.putExtra("sms_body",stringArray[1]);
+                                startActivity(intent);
+                                camerasource.stop();
                             }
                         }});}}});}}
 

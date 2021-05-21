@@ -87,7 +87,6 @@ public class NotificationFragment extends Fragment {
                 try {
                     value = dataSnapshot.getValue(String.class);
                     pushdatas = new ArrayList<>();
-                    Log.d("aaaa", value);
                     if (value.contains(",&,")) {
                         aaa = value.split(",&,");
                     } else {
@@ -96,7 +95,6 @@ public class NotificationFragment extends Fragment {
 
                     for (String a : aaa) {
                         NotificationData notificationData = new Gson().fromJson(String.valueOf(a), NotificationData.class);
-                        Log.d("aaaa", notificationData.getTitle());
                         pushdatas.add(new DataDetail(notificationData.getTitle(), notificationData.getContent(), notificationData.getVideo(), notificationData.getWeb(), notificationData.getPhoto(), notificationData.getCover()));
                     }
 

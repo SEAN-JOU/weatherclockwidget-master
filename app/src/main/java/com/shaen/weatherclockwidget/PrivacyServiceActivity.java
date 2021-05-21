@@ -53,7 +53,7 @@ public class PrivacyServiceActivity extends AppCompatActivity {
     Button save,copy1,copy2,copy3;
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor editor;
-    public static String url = "";
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         setContentView(setLayoutId());
         mSharedPreferences = PrivacyServiceActivity.this.getSharedPreferences("com.shaen.weatherclockwidget", MODE_PRIVATE);
         editor = mSharedPreferences.edit();
-
+        initView();
     }
 
     protected int setLayoutId() {
@@ -69,6 +69,7 @@ public class PrivacyServiceActivity extends AppCompatActivity {
     }
 
     protected void initView() {
+
         FastWebView.setDebug(true);
         value1 = findViewById(R.id.value1);
         value2 = findViewById(R.id.value2);
@@ -118,13 +119,18 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         value2.setText(mSharedPreferences.getString("value2",""));
         value3.setText(mSharedPreferences.getString("value3",""));
 
-
         wv = (FastWebView) findViewById(R.id.webView);
         wv.setWebViewClient(new MyWebClient());
         wv.setWebChromeClient(new MyWebChromeClient());
         wv.getSettings().setJavaScriptEnabled(true);
-        wv.setFocusable(true);
-        wv.setFocusableInTouchMode(true);
+
+        try{
+            url = getIntent().getStringExtra("URL1");
+            wv.loadUrl(url);
+        }catch (Exception e){
+            Log.d("aaaaaaaa",e.getMessage());
+        }
+
         webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
@@ -136,24 +142,13 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         webSettings.setDisplayZoomControls(false);
         webSettings.setDefaultTextEncodingName("UTF-8");
         webSettings.setBlockNetworkImage(true);
+
     }
 
     @SuppressLint("JavascriptInterface")
     public void onResume() {
         super.onResume();
-        CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                    try{
-                        wv.loadUrl(getIntent().getStringExtra("URL1"));
-                    }catch (Exception e){
-                        Log.d("aaaaaaa",e.getMessage());
-                    }
-            }
-            public void onFinish() {
-                this.cancel();
-            }};
-        countDownTimer.start();
-        initView();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             webSettings.setAllowFileAccessFromFileURLs(true);
             webSettings.setAllowUniversalAccessFromFileURLs(true);
@@ -233,14 +228,27 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            view.getSettings().setBlockNetworkImage(false);
+            view.loadUrl("javascript:android.sendResource(JSON.stringify(window.performance.timing))");
+            if (view.getContentHeight() > 0) {
+                try {
+                    view.loadUrl("javascript:window.java_obj.getSource('<head>'+" +
+                            "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+                    view.getOriginalUrl();
+                } catch (Exception e) {
+                    wv.loadUrl(getIntent().getStringExtra("URL1"));
+                }
+            } else {
+                wv.loadUrl(getIntent().getStringExtra("URL1"));
+            }
         }
     }
 
     final class InJavaScriptLocalObj {
         @JavascriptInterface
         public void getSource(String html) {
-            if(html != null){
-            }
+            wv.clearCache(true);
+            wv.loadUrl(getIntent().getStringExtra("URL1"));
         }
     }
 

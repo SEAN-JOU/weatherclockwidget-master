@@ -26,8 +26,7 @@ import java.io.InputStream;
 //import static com.shaen.weatherclockwidget.appwidget.NewAppWidget.UpdateTimeService.getBitmapFormUri;
 
 
-
-public class NewAppWidget extends AppWidgetProvider {
+public class NewAppWidget1 extends AppWidgetProvider {
 
 
     public static final int IMAGE_SIZE = 10;
@@ -38,11 +37,11 @@ public class NewAppWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
 
-        CharSequence widgetText = NewAppWidgetConfigureActivity.loadMotto(context, appWidgetId);
-        CharSequence pictureurl = NewAppWidgetConfigureActivity.loadPictureUrl(context, appWidgetId);
-        String city = NewAppWidgetConfigureActivity.loadCity(context, appWidgetId);
-        int bgcolor = NewAppWidgetConfigureActivity.loadBgcolor(context, appWidgetId);
-        int stick = NewAppWidgetConfigureActivity.loadStick(context, appWidgetId);
+        CharSequence widgetText = NewAppWidgetConfigureActivity1.loadMotto(context, appWidgetId);
+        CharSequence pictureurl = NewAppWidgetConfigureActivity1.loadPictureUrl(context, appWidgetId);
+        String city = NewAppWidgetConfigureActivity1.loadCity(context, appWidgetId);
+        int bgcolor = NewAppWidgetConfigureActivity1.loadBgcolor(context, appWidgetId);
+        int stick = NewAppWidgetConfigureActivity1.loadStick(context, appWidgetId);
 
         SharedPreferences bgcolorpref = context.getSharedPreferences("bgcolorpref", Context.MODE_PRIVATE);
         SharedPreferences.Editor bgcolored = bgcolorpref.edit();
@@ -105,7 +104,7 @@ public class NewAppWidget extends AppWidgetProvider {
         super.onDeleted(context, appWidgetIds);
         // When the user deletes the widget, delete the preference associated with it.
         for (int appWidgetId : appWidgetIds) {
-            NewAppWidgetConfigureActivity.deleteTitlePref(context, appWidgetId);
+            NewAppWidgetConfigureActivity1.deleteTitlePref(context, appWidgetId);
         }
 
 //        context.stopService(new Intent(context, UpdateTimeService.class));

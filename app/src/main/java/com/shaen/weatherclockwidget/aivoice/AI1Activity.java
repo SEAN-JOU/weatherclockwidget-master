@@ -130,7 +130,6 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
         reference = FirebaseDatabase.getInstance().getReference().child(getSharedPreferences("ONLY", MODE_PRIVATE)
                 .getString("IMEI", ""));
 
-        Log.d("aaaaaaaaaaa","成功");
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

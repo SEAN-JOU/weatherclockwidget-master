@@ -213,9 +213,6 @@ public class MainActivity extends BaseActivity {
                     e.printStackTrace();
                 }
 
-
-                Log.d("aaaaaaalocal",localverCode+"");
-                Log.d("aaaaaaamarket",marketverCode+"");
                 if(localverCode != 0 && marketverCode != 0)
                 {
                     if(marketverCode>localverCode)

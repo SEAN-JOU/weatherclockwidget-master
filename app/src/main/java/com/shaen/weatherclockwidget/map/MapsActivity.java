@@ -107,12 +107,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 value = dataSnapshot.getValue(String.class);
-                Log.d("aaaa", value);
                 View view = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_marker, null);
                 String[] aaa = value.split(",&,");
                 for (String a : aaa) {
                     EatData eatData = new Gson().fromJson(String.valueOf(a), EatData.class);
-                    Log.d("aaaa", eatData.getTitle());
                     MarkerOptions markerOptions = new MarkerOptions();
                     String[] aaa1 = eatData.getPos().split(",");
 
