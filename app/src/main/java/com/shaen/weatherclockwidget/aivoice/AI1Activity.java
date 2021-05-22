@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.shaen.weatherclockwidget.R;
+import com.shaen.weatherclockwidget.chart.DemoBase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +58,7 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             android.Manifest.permission.READ_PHONE_STATE,
             android.Manifest.permission.CAMERA,
+            Manifest.permission.CALL_PHONE,
             android.Manifest.permission.WRITE_CONTACTS,
             android.Manifest.permission.RECORD_AUDIO,
             android.Manifest.permission.READ_PHONE_STATE,
@@ -77,10 +79,6 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
 
 
     }
-
-//        hashMap.put("帥","summer");
-//        hashMap.put("美","新垣結依");
-
 
     @Override
     public void onInit(int status) {
@@ -121,14 +119,14 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
 
-        SharedPreferences pref = getSharedPreferences("ONLY", MODE_PRIVATE);
-        pref.edit().putString("IMEI", imei).commit();
+        imei = getRandom(10000,2000);
+        SharedPreferences pref = getSharedPreferences("com.shaen.weatherclockwidget", MODE_PRIVATE);
+        if(pref.getString("IMEI","").equals("")){
+            pref.edit().putString("IMEI", imei).commit();
+        }
 
-
-        reference = FirebaseDatabase.getInstance().getReference().child(getSharedPreferences("ONLY", MODE_PRIVATE)
-                .getString("IMEI", ""));
+        reference = FirebaseDatabase.getInstance().getReference().child(pref.getString("IMEI", ""));
 
         reference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -179,7 +177,7 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
                         String[] qa = createQA.split("答案");
 
                         if (!qa[0].isEmpty() && !qa[1].isEmpty()) {
-                            DatabaseReference myRef = database.getReference().child(getSharedPreferences("ONLY", MODE_PRIVATE)
+                            DatabaseReference myRef = database.getReference().child(getSharedPreferences("com.shaen.weatherclockwidget", MODE_PRIVATE)
                                     .getString("IMEI", ""));
                             Map<String, Object> map = new HashMap<String, Object>();
                             String temp_key = myRef.push().getKey();
@@ -364,5 +362,9 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
             }
         }
         return needRequestPermissonList;
+    }
+
+    public static String getRandom(int range, int startsfrom) {
+       return String.valueOf(Math.random() * range + startsfrom).replace(".","");
     }
 }

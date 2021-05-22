@@ -38,7 +38,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:gravity="center"
-        android:text="版權所有@上恩工作室出品 2018"
+        android:text="版權所有@上恩工作室出品 2021"
         android:textColor="@color/whiteword"
         android:textSize="15dp" />
 

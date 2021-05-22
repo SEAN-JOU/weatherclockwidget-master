@@ -39,7 +39,7 @@ public abstract class DemoBase extends AppCompatActivity {
         mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
     }
 
-    protected float getRandom(float range, float startsfrom) {
+    protected  float getRandom(float range, float startsfrom) {
         return (float) (Math.random() * range) + startsfrom;
     }
 

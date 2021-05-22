@@ -21,6 +21,7 @@ import com.shaen.weatherclockwidget.other.CustomDialogFragment;
 import com.shaen.weatherclockwidget.camera.CameraActivity;
 import com.shaen.weatherclockwidget.map.MapsActivity;
 import com.shaen.weatherclockwidget.navigation.ImageInfo;
+import com.shaen.weatherclockwidget.scan.ScanActivity;
 import com.shaen.weatherclockwidget.sticker.StickerActivity;
 /**
  * Created by NB004 on 2018/6/20.
@@ -73,15 +74,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                     mSideMenuState=true;
                     showMissingPermissionDialog();
                     break;
-
-//                case 5:
-//                    mSideMenuState=true;
-//                    startActivity(new Intent(BaseActivity.this, CropActivity.class));
-//                    break;
-//                case 6:
-//                    mSideMenuState=true;
-//                    startActivity(new Intent(BaseActivity.this, RotateAnimationActivity.class));
-//                    break;
             }
         }
     };
@@ -134,6 +126,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (setAibuttonView() != 0) {
             aibutton = findViewById(R.id.ai);
             aibutton.setOnClickListener(mOnClickListener);
+            aibutton.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    startActivity(new Intent(BaseActivity.this, AI1Activity.class));
+                    return false;
+                }
+            });
         }
     }
 
@@ -185,7 +184,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     break;
 
                 case R.id.ai:
-                   startActivity(new Intent(BaseActivity.this, AI1Activity.class));
+                    startActivity(new Intent(BaseActivity.this, ScanActivity.class));
                     break;
 
                 case R.id.close:

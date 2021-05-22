@@ -50,7 +50,7 @@ public class AI2Activity extends AppCompatActivity {
                 }
 
 
-                DatabaseReference myRef = database.getReference().child(getSharedPreferences("ONLY", MODE_PRIVATE)
+                DatabaseReference myRef = database.getReference().child(getSharedPreferences("com.shaen.weatherclockwidget", MODE_PRIVATE)
                         .getString("IMEI", ""));
                 Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = myRef.push().getKey();
