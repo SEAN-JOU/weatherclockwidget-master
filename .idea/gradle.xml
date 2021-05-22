@@ -13,12 +13,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/MCameraLibrary" />
             <option value="$PROJECT_DIR$/MPChartLib" />
-            <option value="$PROJECT_DIR$/alarmmanagerclock" />
             <option value="$PROJECT_DIR$/animatelibrary" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/crop" />
-            <option value="$PROJECT_DIR$/cropimage" />
-            <option value="$PROJECT_DIR$/seanUtils" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

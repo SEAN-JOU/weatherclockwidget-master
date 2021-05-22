@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/animatelibrary/Desktop.weatherclockwidget-master.animatelibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/animatelibrary/Desktop.weatherclockwidget-master.animatelibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/weatherclockwidget-master.iml" filepath="$PROJECT_DIR$/weatherclockwidget-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MCameraLibrary/weatherclockwidget-master.MCameraLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/MCameraLibrary/weatherclockwidget-master.MCameraLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/weatherclockwidget-master.MPChartLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/weatherclockwidget-master.MPChartLib.iml" />

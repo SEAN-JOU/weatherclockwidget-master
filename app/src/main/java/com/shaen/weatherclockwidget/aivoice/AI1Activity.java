@@ -306,19 +306,13 @@ public class AI1Activity extends AppCompatActivity implements TextToSpeech.OnIni
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if(mTts!=null){
-//            mTts.shutdown();
-//        }
-//        this.finish();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-//        if(mTts!=null){
-//            mTts.shutdown();
-//        }
-//        this.finish();
+
     }
 
     @Override

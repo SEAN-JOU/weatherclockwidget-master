@@ -21,8 +21,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.sean.utils.OkhttpUtils;
-import com.sean.utils.okhttp.SystemCode;
+
 import com.shaen.weatherclockwidget.R;
 
 import java.util.ArrayList;
@@ -31,23 +30,6 @@ public class ChartActivity extends DemoBase implements
         OnChartValueSelectedListener{
 
     private PieChart mChart;
-    public static final String url = "http://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx";
-    public Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case SystemCode.OkhttpFailure:
-                    ConnectivityManager mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
-                    if (mNetworkInfo != null) {
-                        if (mNetworkInfo.isConnected()) {} else {}}
-                    break;
-                case SystemCode.OkhttpSuccess:
-
-
-                    break;
-            }
-            return false;}});
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +41,6 @@ public class ChartActivity extends DemoBase implements
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("");
 
-        try {
-            OkhttpUtils.getInstance().getmethod(handler, url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         mChart = findViewById(R.id.chart1);
         mChart.setUsePercentValues(true);

@@ -222,11 +222,9 @@ public class CameraActivity extends AppCompatActivity implements CameraControlLi
         switch (v.getId()) {
 
             case R.id.ivFlash:
-
                 currentFlash++;
                 ivFlash.setImageResource(FLASH_ICONS[currentFlash % 3]);
                 mCameraView.setFlash(FLASH_OPTIONS[currentFlash % 3]);
-
                 break;
             case R.id.btnCamera:
                 mCameraView.startVideoRecorder();
@@ -250,11 +248,9 @@ public class CameraActivity extends AppCompatActivity implements CameraControlLi
                 t.show();
                 break;
             case R.id.btnStop:
-
                 mCameraView.stopVideoRecorder();
                 Toast.makeText(CameraActivity.this,"Stop Record",Toast.LENGTH_SHORT).show();
                 break;
-
             case R.id.gallery:
                 Intent intentPhoto = new Intent();
                 intentPhoto.addCategory(Intent.CATEGORY_OPENABLE);

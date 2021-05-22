@@ -1,1 +1,1 @@
-include ':app', ':seanUtils', ':MCameraLibrary', ':MPChartLib', ':alarmmanagerclock', ':cropimage', ':crop', ':animatelibrary'
+include ':app', ':MCameraLibrary', ':MPChartLib', ':animatelibrary'

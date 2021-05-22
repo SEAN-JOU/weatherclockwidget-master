@@ -67,9 +67,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':seanUtils')
     implementation project(':MCameraLibrary')
     implementation project(':MPChartLib')
+    implementation project(':animatelibrary')
     implementation 'com.arialyy.aria:aria-core:3.4.8'
     annotationProcessor 'com.arialyy.aria:aria-compiler:3.4.8'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'

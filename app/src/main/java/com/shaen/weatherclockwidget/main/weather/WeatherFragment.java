@@ -21,12 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
-import com.sean.utils.OkhttpUtils;
-import com.sean.utils.okhttp.SystemCode;
 import com.shaen.weatherclockwidget.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,39 +38,9 @@ public class WeatherFragment extends Fragment {
     String desc ="奈子貓奔跑鐘APP天氣資料來源台北市政府OPENDATA，只作參考途，奈子貓奔跑鐘APP致力確保提供的資料準確無誤APP內容如有任何錯漏，奈子貓奔跑鐘APP概不負責。";
     public List<WeatherData.WeatherDataResults> results = null;
     public List<WeatherData.WeatherDataResults> location = null;
-    public static final String url = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=e6831708-02b4-4ef8-98fa-4b4ce53459d9";
     RecyclerView wlistview;
     Activity context;
-    public Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case SystemCode.OkhttpFailure:
 
-                    ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
-
-                    if (mNetworkInfo != null) {
-                        if (mNetworkInfo.isConnected()) {
-
-                        } else {
-
-                        }
-                    }
-
-                    break;
-                case SystemCode.OkhttpSuccess:
-
-                    WeatherData weatherData = new Gson().fromJson(String.valueOf(msg.obj), WeatherData.class);
-                    WeatherData.WeatherDataResult result = weatherData.result;
-
-                    results = result.results;
-
-                    break;
-            }
-            return false;
-        }
-    });
 
     public WeatherFragment(){
 
@@ -223,13 +189,4 @@ public class WeatherFragment extends Fragment {
         return view;
     }
 
-    public void onStart(){
-        super.onStart();
-        try {
-            OkhttpUtils.getInstance().getmethod(handler, url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

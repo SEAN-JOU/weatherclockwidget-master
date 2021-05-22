@@ -8,15 +8,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -33,7 +31,7 @@ import java.util.List;
 public class ScanActivity extends AppCompatActivity {
 
     SurfaceView cameraView;
-    EditText ett;
+    TextView txv;
     private static final int PERMISSON_REQUESTCODE = 0;
 
     protected String[] needPermissions = {
@@ -50,7 +48,7 @@ public class ScanActivity extends AppCompatActivity {
 
         checkPermissions(needPermissions);
         cameraView = (SurfaceView) findViewById(R.id.sfv);
-        ett=(EditText)findViewById(R.id.ett);
+        txv=(TextView) findViewById(R.id.txv);
         Button btn = findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +59,6 @@ public class ScanActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     protected void onResume(){
@@ -70,7 +67,6 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void createCameraSource() {
-
         BarcodeDetector barcodedetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE).build();
         final CameraSource camerasource = new CameraSource.Builder(this, barcodedetector)
@@ -90,43 +86,38 @@ public class ScanActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
             }
-
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
                 camerasource.stop();
             }});
-
-
 
         barcodedetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
 
             }
-
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
 
                 final SparseArray<Barcode> barcodes =detections.getDetectedItems();
                 if (barcodes.size() != 0) {
-                    ett.post(new Runnable() {
+                    txv.post(new Runnable() {
                         public void run() {
-                            ett.setText(barcodes.valueAt(0).displayValue);
+                            txv.setText(barcodes.valueAt(0).displayValue);
                             try{
-                                String inputString = ett.getText().toString();
+                                String inputString = txv.getText().toString();
                                 String[] stringArray = inputString.split("\n");
-                                if(ett.getText().toString().contains("http")){
-                                    if(ett.getText().toString().contains("app")){
-                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(ett.getText().toString())));
+                                if(txv.getText().toString().contains("http")){
+                                    if(txv.getText().toString().contains("app")){
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(txv.getText().toString())));
                                         camerasource.stop();
                                     }else{
                                         Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
-                                        it.putExtra("URL1",ett.getText().toString());
+                                        it.putExtra("URL1",txv.getText().toString());
                                         if(it.getStringExtra("URL1") != null){
                                             startActivity(it);
                                         }

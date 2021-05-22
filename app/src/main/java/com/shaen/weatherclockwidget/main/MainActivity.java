@@ -84,15 +84,13 @@ public class MainActivity extends BaseActivity {
     PrefManager1 prefManager1;
     private static final int PERMISSON_REQUESTCODE = 0;
     private InterstitialAd mInterstitialAd;
-    private boolean isNeedCheck = true;
     AdView mAdView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private static int sOffScreenLimit = 1;
-    int marketverCode = 0,localverCode = 0;
+    int cloudVersion = 0, localVersion = 0;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
-    public String VVV;
     protected String[] needPermissions = {
             android.Manifest.permission.READ_CONTACTS,
             android.Manifest.permission.READ_SMS,
@@ -143,11 +141,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //initCamera();
-
         circleImageView = findViewById(R.id.profile_image);
         Glide.with(this).load("http://present810209.twf.node.tw/uploads/image.png").into(circleImageView);
-
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Version");
@@ -169,7 +164,6 @@ public class MainActivity extends BaseActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tablayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
 
-
         initData();
         View headerView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.custom_tab, null, false);
@@ -179,71 +173,61 @@ public class MainActivity extends BaseActivity {
         LinearLayout linearLayout2 = (LinearLayout) headerView.findViewById(R.id.ll2);
         LinearLayout linearLayout3 = (LinearLayout) headerView.findViewById(R.id.ll3);
         LinearLayout linearLayout4 = (LinearLayout) headerView.findViewById(R.id.ll4);
-
-
         mTabLayout.getTabAt(0).setCustomView(linearLayoutOne);
         mTabLayout.getTabAt(1).setCustomView(linearLayout2);
         mTabLayout.getTabAt(2).setCustomView(linearLayout3);
         mTabLayout.getTabAt(3).setCustomView(linearLayout4);
 
-        if (isNeedCheck) {
             checkPermissions(needPermissions);
-        }
-
 
     }
 
-
-
-
-
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
-
         databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                VVV = dataSnapshot.getValue(String.class);
-                marketverCode=Integer.valueOf(VVV);
-                try {
-                    PackageInfo pInfo = MainActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
-                    localverCode = pInfo.versionCode;
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                        String value = dataSnapshot.getValue(String.class);
+                                                        cloudVersion = Integer.valueOf(value);
+                                                        try {
+                                                            PackageInfo pInfo = MainActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                                                            localVersion = pInfo.versionCode;
+                                                        } catch (PackageManager.NameNotFoundException e) {
+                                                            e.printStackTrace();
+                                                        } finally {
+                                                            updateAppGooglePlay();
+                                                        }
+                                                    }
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+                                                    }
+                                                }
+        );
+    }
 
-                if(localverCode != 0 && marketverCode != 0)
-                {
-                    if(marketverCode>localverCode)
-                    {getlastestapp();}
-                }
+    public void updateAppGooglePlay() {
+        if (localVersion != 0 && cloudVersion != 0) {
+            if (cloudVersion > localVersion) {
+                new AlertDialog.Builder(MainActivity.this).setTitle("版本更新")
+                        .setIcon(R.mipmap.ic_launcher).setMessage("前往GooglePlay更新奈子貓奔跑鐘")//設定顯示的文字
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        })
+                        .setPositiveButton("更新", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent googleplay = new Intent(Intent.ACTION_VIEW);
+                                googleplay.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.shaen.weatherclockwidget"));
+                                startActivity(googleplay);
+                            }
+                        }).show();
             }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }});
+        }
     }
-
-    public void getlastestapp() {
-
-        new AlertDialog.Builder(MainActivity.this).setTitle("版本更新")
-                .setIcon(R.mipmap.ic_launcher).setMessage("前往GooglePlay更新奈子貓奔跑鐘")//設定顯示的文字
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }})
-                .setPositiveButton("更新", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent googleplay = new Intent(Intent.ACTION_VIEW);
-                        googleplay.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.shaen.weatherclockwidget"));
-                        startActivity(googleplay);
-                    }}).show();
-
-    }
-
 
     private void initData() {
         ArrayList<Fragment> fragmentList = new ArrayList<>();
@@ -251,7 +235,6 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(new WeatherFragment(this));
         fragmentList.add(new InformationFragment(this));
         fragmentList.add(new StarFragment(this));
-
 
         ArrayList<String> titleList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -278,30 +261,16 @@ public class MainActivity extends BaseActivity {
 
 
     private void launchHomeScreen() {
-
         prefManager1.setFirstTimeLaunch(false);
-
-//        DataDetail dataDetail = new DataDetail(
-//                "APP操作說明",
-//                "",
-//                "https://www.youtube.com/watch?v=yRbBF4b6V34",
-//                "",
-//                "",
-//                "https://firebasestorage.googleapis.com/v0/b/weatherclockwidget.appspot.com/o/34.png?alt=media&token=f55d0b90-58fe-4b71-91c8-1b7dfe70990e");
-//        DataAdapter dbAdapter=new DataAdapter(MainActivity.this);
-//        dbAdapter.add(dataDetail);
-
         String token = FirebaseInstanceId.getInstance().getToken();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("FCMid");
         myRef.child(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN)
                 .format(new Date()))
                 .setValue(token);
-
     }
 
     public void onBackPressed() {
-
         if (mSideMenuState) {
             mSideMenuState = false;
             mSideMenu.setVisibility(View.GONE);
@@ -309,7 +278,6 @@ public class MainActivity extends BaseActivity {
             CustomDialogFragment fff = new CustomDialogFragment(MainActivity.this);
             fff.show(getSupportFragmentManager(), "A");
         }
-        //取得片段管理者以與此活動相關聯的片段連結
     }
 
     private void checkPermissions(String... permissions) {
@@ -322,7 +290,6 @@ public class MainActivity extends BaseActivity {
                     PERMISSON_REQUESTCODE);
         }
     }
-
     private List<String> findDeniedPermissions(String[] permissions) {
         List<String> needRequestPermissonList = new ArrayList<String>();
         for (String perm : permissions) {
@@ -335,6 +302,5 @@ public class MainActivity extends BaseActivity {
         }
         return needRequestPermissonList;
     }
-
 }
 
