@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.shaen.weatherclockwidget.scan.ScanActivity">
 
 
     <TextView
-        android:id="@+id/txv1"
+        android:id="@+id/edt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sfv"
@@ -21,16 +23,16 @@
         android:textColor="@color/blackword"
         android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/txv"
+    <EditText
+        android:id="@+id/edt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         android:ems="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +44,7 @@
 
     <SurfaceView
         android:id="@+id/sfv"
+
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_alignParentStart="true"
@@ -62,10 +65,18 @@
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txv1"
+        android:layout_below="@id/edt1"
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="false"
         android:layout_marginTop="10dp"
         android:text="進入權限設定" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt"
+        android:layout_marginTop="10dp"
+        android:text="複製QRcode內容" />
 
 </RelativeLayout>

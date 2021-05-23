@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
@@ -122,27 +123,22 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         wv = (FastWebView) findViewById(R.id.webView);
         wv.setWebViewClient(new MyWebClient());
         wv.setWebChromeClient(new MyWebChromeClient());
-        wv.getSettings().setJavaScriptEnabled(true);
-
-        try{
-            url = getIntent().getStringExtra("URL1");
-            wv.loadUrl(url);
-        }catch (Exception e){
-            Log.d("aaaaaaaa",e.getMessage());
-        }
-
         webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setAllowFileAccess(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
-        webSettings.setSupportZoom(false);
-        webSettings.setBuiltInZoomControls(false);
-        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(true);
         webSettings.setDefaultTextEncodingName("UTF-8");
         webSettings.setBlockNetworkImage(true);
-
+        try{
+            url = getIntent().getStringExtra("URL1");
+            wv.loadUrl(url);
+        }catch (Exception e){
+        }
     }
 
     @SuppressLint("JavascriptInterface")
@@ -210,6 +206,8 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            Log.d("aaaaaa2",url);
+
         }
 
         @Override
@@ -218,18 +216,21 @@ public class PrivacyServiceActivity extends AppCompatActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            wv.loadUrl(request.getUrl().toString());
             return true;
         }
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-
+            Log.d("aaaaaa3",request.getUrl().toString());
             return super.shouldInterceptRequest(view, request);
         }
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            Log.d("aaaaaa4",url);
             view.getSettings().setBlockNetworkImage(false);
             view.loadUrl("javascript:android.sendResource(JSON.stringify(window.performance.timing))");
+
             if (view.getContentHeight() > 0) {
                 try {
                     view.loadUrl("javascript:window.java_obj.getSource('<head>'+" +
@@ -248,7 +249,7 @@ public class PrivacyServiceActivity extends AppCompatActivity {
         @JavascriptInterface
         public void getSource(String html) {
             wv.clearCache(true);
-            wv.loadUrl(getIntent().getStringExtra("URL1"));
+            wv.loadUrl(html);
         }
     }
 

@@ -16,19 +16,6 @@
     </style>
 
 
-    <style name="FullScreenTheme" parent="ActivityBaseTheme">
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowEnableSplitTouch">false</item>
-        <item name="android:splitMotionEvents">false</item>
-    </style>
-
-    <style name="ActivityBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowEnableSplitTouch">false</item>
-        <item name="android:windowBackground">@drawable/loading</item>
-        <item name="android:splitMotionEvents">false</item>
-    </style>
-
     <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>

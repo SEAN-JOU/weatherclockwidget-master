@@ -48,37 +48,7 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class MainActivity extends BaseActivity {
-
-    private static final String[] home_function_name = {
-            "美颜",
-            "Animoji",
-            "道具贴纸",
-            "AR面具",
-            "换脸",
-            "表情识别",
-            "音乐滤镜",
-            "背景分割",
-            "手势识别",
-            "哈哈镜",
-//            "人像光效",
-            "人像驱动"
-    };
-
-    private static final int[] home_function_res = {
-            R.drawable.main_beauty,
-            R.drawable.main_avatar,
-            R.drawable.main_effect,
-            R.drawable.main_ar_mask,
-            R.drawable.main_change_face,
-            R.drawable.main_expression,
-            R.drawable.main_music_fiter,
-            R.drawable.main_background,
-            R.drawable.main_gesture,
-            R.drawable.main_face_warp,
-            R.drawable.main_portrait_drive
-    };
 
     CircleImageView circleImageView;
     PrefManager1 prefManager1;
@@ -90,7 +60,8 @@ public class MainActivity extends BaseActivity {
     private static int sOffScreenLimit = 1;
     int cloudVersion = 0, localVersion = 0;
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseVersion, databaseUpdate;
+    boolean isGooglePlay = true;
     protected String[] needPermissions = {
             android.Manifest.permission.READ_CONTACTS,
             android.Manifest.permission.READ_SMS,
@@ -145,7 +116,8 @@ public class MainActivity extends BaseActivity {
         Glide.with(this).load("http://present810209.twf.node.tw/uploads/image.png").into(circleImageView);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Version");
+        databaseVersion = database.getReference("Version");
+        databaseUpdate = database.getReference("Update");
 
         ActivityController.mainActivity = MainActivity.this;
         MobileAds.initialize(this, getResources().getString(R.string.banner_ad_unit_id));
@@ -178,53 +150,74 @@ public class MainActivity extends BaseActivity {
         mTabLayout.getTabAt(2).setCustomView(linearLayout3);
         mTabLayout.getTabAt(3).setCustomView(linearLayout4);
 
-            checkPermissions(needPermissions);
-
+        checkPermissions(needPermissions);
+        checkVersion();
     }
 
     public void onResume() {
         super.onResume();
+    }
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                                        String value = dataSnapshot.getValue(String.class);
-                                                        cloudVersion = Integer.valueOf(value);
-                                                        try {
-                                                            PackageInfo pInfo = MainActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
-                                                            localVersion = pInfo.versionCode;
-                                                        } catch (PackageManager.NameNotFoundException e) {
-                                                            e.printStackTrace();
-                                                        } finally {
-                                                            updateAppGooglePlay();
-                                                        }
-                                                    }
-                                                    @Override
-                                                    public void onCancelled(DatabaseError databaseError) {
-                                                    }
-                                                }
+    public void checkVersion() {
+        databaseVersion.addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String value = dataSnapshot.getValue(String.class);
+                        cloudVersion = Integer.valueOf(value);
+                        try {
+                            PackageInfo pInfo = MainActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                            localVersion = pInfo.versionCode;
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        } finally {
+                            updateApp();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                }
         );
     }
 
-    public void updateAppGooglePlay() {
+    public void updateApp() {
         if (localVersion != 0 && cloudVersion != 0) {
             if (cloudVersion > localVersion) {
-                new AlertDialog.Builder(MainActivity.this).setTitle("版本更新")
-                        .setIcon(R.mipmap.ic_launcher).setMessage("前往GooglePlay更新奈子貓奔跑鐘")//設定顯示的文字
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                databaseUpdate.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String value = dataSnapshot.getValue(String.class);
+                        isGooglePlay = Boolean.parseBoolean(value);
+                        if (isGooglePlay) {
+                            new AlertDialog.Builder(MainActivity.this).setTitle("版本更新")
+                                    .setIcon(R.mipmap.ic_launcher).setMessage("前往GooglePlay更新奈子貓奔跑鐘")//設定顯示的文字
+                                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        })
-                        .setPositiveButton("更新", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent googleplay = new Intent(Intent.ACTION_VIEW);
-                                googleplay.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.shaen.weatherclockwidget"));
-                                startActivity(googleplay);
-                            }
-                        }).show();
+                                        }
+                                    })
+                                    .setPositiveButton("更新", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent googleplay = new Intent(Intent.ACTION_VIEW);
+                                            googleplay.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.shaen.weatherclockwidget"));
+                                            startActivity(googleplay);
+                                        }
+                                    }).show();
+                        } else {
+                            Intent it = new Intent(MainActivity.this, Main3Activity.class);
+                            startActivity(it);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         }
     }
@@ -290,6 +283,7 @@ public class MainActivity extends BaseActivity {
                     PERMISSON_REQUESTCODE);
         }
     }
+
     private List<String> findDeniedPermissions(String[] permissions) {
         List<String> needRequestPermissonList = new ArrayList<String>();
         for (String perm : permissions) {

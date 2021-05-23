@@ -6,12 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/weatherclockwidget-master.iml" filepath="$PROJECT_DIR$/weatherclockwidget-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MCameraLibrary/weatherclockwidget-master.MCameraLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/MCameraLibrary/weatherclockwidget-master.MCameraLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MPChartLib/weatherclockwidget-master.MPChartLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MPChartLib/weatherclockwidget-master.MPChartLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/alarmmanagerclock/weatherclockwidget-master.alarmmanagerclock.iml" filepath="$PROJECT_DIR$/.idea/modules/alarmmanagerclock/weatherclockwidget-master.alarmmanagerclock.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/animatelibrary/weatherclockwidget-master.animatelibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/animatelibrary/weatherclockwidget-master.animatelibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/weatherclockwidget-master.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/weatherclockwidget-master.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/crop/weatherclockwidget-master.crop.iml" filepath="$PROJECT_DIR$/.idea/modules/crop/weatherclockwidget-master.crop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cropimage/weatherclockwidget-master.cropimage.iml" filepath="$PROJECT_DIR$/.idea/modules/cropimage/weatherclockwidget-master.cropimage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/seanUtils/weatherclockwidget-master.seanUtils.iml" filepath="$PROJECT_DIR$/.idea/modules/seanUtils/weatherclockwidget-master.seanUtils.iml" />
     </modules>
   </component>
 </project>

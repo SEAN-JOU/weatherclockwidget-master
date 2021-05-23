@@ -20,17 +20,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
 
                 <EditText
                     android:id="@+id/value2"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:hint="姓名" />
 
                 <Button
                     android:id="@+id/copy2"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="複製" />
 
             </LinearLayout>
@@ -38,34 +42,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
 
                 <EditText
                     android:id="@+id/value3"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:hint="手機電話" />
 
                 <Button
                     android:id="@+id/copy3"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="複製" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
 
                 <EditText
                     android:id="@+id/value1"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:hint="電子信箱" />
 
                 <Button
                     android:id="@+id/copy1"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:text="複製" />
             </LinearLayout>
 
@@ -73,12 +85,14 @@
                 android:id="@+id/save"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="save" />
+                android:text="儲存" />
 
             <com.shaen.weatherclockwidget.fastwebview.FastWebView
                 android:id="@+id/webView"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="wrap_content"
                 tools:ignore="WebViewLayout" />
 
         </LinearLayout>

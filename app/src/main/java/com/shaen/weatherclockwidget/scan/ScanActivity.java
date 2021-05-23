@@ -1,5 +1,7 @@
 package com.shaen.weatherclockwidget.scan;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.vision.CameraSource;
@@ -31,7 +34,7 @@ import java.util.List;
 public class ScanActivity extends AppCompatActivity {
 
     SurfaceView cameraView;
-    TextView txv;
+    EditText edt;
     private static final int PERMISSON_REQUESTCODE = 0;
 
     protected String[] needPermissions = {
@@ -48,7 +51,7 @@ public class ScanActivity extends AppCompatActivity {
 
         checkPermissions(needPermissions);
         cameraView = (SurfaceView) findViewById(R.id.sfv);
-        txv=(TextView) findViewById(R.id.txv);
+        edt=(EditText) findViewById(R.id.edt);
         Button btn = findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,18 @@ public class ScanActivity extends AppCompatActivity {
                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 intent.setData(Uri.parse("package:" + getPackageName()));
                 startActivity(intent);
+            }
+        });
+
+        Button btn1 = findViewById(R.id.btn1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("text", edt.getText().toString());
+                manager.setPrimaryClip(clipData);
+                Toast.makeText(ScanActivity.this,"複製成功",Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -105,19 +120,19 @@ public class ScanActivity extends AppCompatActivity {
 
                 final SparseArray<Barcode> barcodes =detections.getDetectedItems();
                 if (barcodes.size() != 0) {
-                    txv.post(new Runnable() {
+                    edt.post(new Runnable() {
                         public void run() {
-                            txv.setText(barcodes.valueAt(0).displayValue);
+                            edt.setText(barcodes.valueAt(0).displayValue);
                             try{
-                                String inputString = txv.getText().toString();
+                                String inputString = edt.getText().toString();
                                 String[] stringArray = inputString.split("\n");
-                                if(txv.getText().toString().contains("http")){
-                                    if(txv.getText().toString().contains("app")){
-                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(txv.getText().toString())));
+                                if(edt.getText().toString().contains("http")){
+                                    if(edt.getText().toString().contains("app")){
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(edt.getText().toString())));
                                         camerasource.stop();
                                     }else{
                                         Intent it = new Intent(ScanActivity.this, PrivacyServiceActivity.class);
-                                        it.putExtra("URL1",txv.getText().toString());
+                                        it.putExtra("URL1",edt.getText().toString());
                                         if(it.getStringExtra("URL1") != null){
                                             startActivity(it);
                                         }
@@ -130,7 +145,7 @@ public class ScanActivity extends AppCompatActivity {
                                     camerasource.stop();
                                 }
                             }catch (Exception e){
-                                Toast.makeText(ScanActivity.this,"無法有消判別",Toast.LENGTH_LONG).show();
+                                Toast.makeText(ScanActivity.this,"無法有效判別",Toast.LENGTH_LONG).show();
                             }
                         }});}}});}
 

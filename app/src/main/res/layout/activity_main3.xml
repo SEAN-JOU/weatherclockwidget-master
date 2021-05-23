@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.shaen.weatherclockwidget.main.Main3Activity">
 
-    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-        android:id="@+id/test1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingBottom="10dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="10dp"
-        android:text="圆角为高度的一半"
-        app:qmui_isRadiusAdjustBounds="true"/>
-
     <Button
         android:id="@+id/video"
         android:layout_width="match_parent"

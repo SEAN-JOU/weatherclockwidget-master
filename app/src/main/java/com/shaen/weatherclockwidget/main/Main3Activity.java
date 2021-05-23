@@ -64,7 +64,6 @@ public class Main3Activity extends AppCompatActivity {
         chart = findViewById(R.id.chart);
         gif = findViewById(R.id.gif);
 
-
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,24 +216,17 @@ public class Main3Activity extends AppCompatActivity {
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
-
                 if (localVersion != 0 && cloudVersion != 0) {
                     if (cloudVersion > localVersion) {
                         try {
                             new AlertDialog.Builder(Main3Activity.this)
-                                    .setTitle("(" + ")" + "版本")
-                                    .setMessage("更新")
+                                    .setTitle("此版本必須強制更新")
                                     .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             downloadApp.start();
                                         }
-                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                }
-                            }).show();
+                                    }).show();
                         } catch (Exception e) {
                         }
                     }
@@ -245,7 +237,6 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
