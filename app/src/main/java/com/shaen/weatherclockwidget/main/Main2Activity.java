@@ -40,8 +40,6 @@ public class Main2Activity extends AppCompatActivity {
         web = findViewById(R.id.web);
         content = findViewById(R.id.content);
         photo = findViewById(R.id.photo);
-
-
     }
 
 
@@ -75,12 +73,9 @@ public class Main2Activity extends AppCompatActivity {
         }
         if (!String.valueOf(ddd.getVideo()).equals("null")) {
             video.setVisibility(View.VISIBLE);
-            String[] description = ddd.getVideo().split("=");
-            String sss = description[1];
             video.setWebChromeClient(new WebChromeClient() {
             });
-            String summary = "<html><head><style>body{margin:0px 0px 0px 0px;}</style></head><body><iframe width=\"300\" height=\"240\"  src=\"" + "https://www.youtube.com/embed/" + sss + "\"frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe></body></html>";
-            video.loadData(summary, "text/html", null);
+            video.loadUrl(String.valueOf(ddd.getVideo()));
             WebSettings webSettings = video.getSettings();
             webSettings.setJavaScriptEnabled(true);
         }

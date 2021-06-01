@@ -91,5 +91,30 @@
       <option name="name" value="maven5" />
       <option name="url" value="file:/$PROJECT_DIR$/cropimage/distributionUrl%20=%20https:/services.gradle.org/distributions/gradle-4.6-all.zip" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="file:$PROJECT_DIR$/distributionUrl%20=%20https:/services.gradle.org/distributions/gradle-4.6-all.zip" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="file:$PROJECT_DIR$/MPChartLib/distributionUrl%20=%20https:/services.gradle.org/distributions/gradle-4.6-all.zip" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="file:$PROJECT_DIR$/MCameraLibrary/distributionUrl%20=%20https:/services.gradle.org/distributions/gradle-4.6-all.zip" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="file:$PROJECT_DIR$/animatelibrary/distributionUrl%20=%20https:/services.gradle.org/distributions/gradle-4.6-all.zip" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="file:$PROJECT_DIR$/app/distributionUrl%20=%20https:/services.gradle.org/distributions/gradle-4.6-all.zip" />
+    </remote-repository>
   </component>
 </project>
