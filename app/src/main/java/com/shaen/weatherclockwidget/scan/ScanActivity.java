@@ -81,6 +81,10 @@ public class ScanActivity extends AppCompatActivity {
         createCameraSource();
     }
 
+    protected void onStop(){
+        super.onStop();
+    }
+
     private void createCameraSource() {
         BarcodeDetector barcodedetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE).build();
